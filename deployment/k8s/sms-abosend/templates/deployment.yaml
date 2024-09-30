@@ -62,7 +62,7 @@ spec:
                   key: rabbitmq-vhost
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: 8080
               protocol: TCP
           volumeMounts:
             - mountPath: /app/appsettings.Production.json
@@ -83,7 +83,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: monitor
-          image: otel/opentelemetry-collector:0.85.0
+          image: otel/opentelemetry-collector:0.91.0
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - --config=/etc/otel/config.yaml
